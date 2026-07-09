@@ -1,0 +1,13 @@
+# KHANGCAT deploy safety
+server/.env
+server/data/
+server/node_modules/
+server/server-runtime*.log
+
+# Local/build artifacts
+node_modules/
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+

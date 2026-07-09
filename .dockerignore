@@ -1,0 +1,8 @@
+server/.env
+server/data
+server/node_modules
+server/server-runtime*.log
+*.zip
+.git
+node_modules
+*.log

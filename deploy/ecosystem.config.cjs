@@ -1,0 +1,43 @@
+module.exports = {
+  apps: [
+    {
+      name: "khangcat-web",
+      script: "server.js",
+      cwd: "/var/www/khangcat/server",
+      exec_mode: "cluster",
+      instances: 2,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: "450M",
+      kill_timeout: 10000,
+      listen_timeout: 10000,
+      env: {
+        NODE_ENV: "production",
+        PORT: 3000,
+      },
+      error_file: "/var/log/khangcat/web-error.log",
+      out_file: "/var/log/khangcat/web-out.log",
+      merge_logs: true,
+      time: true,
+    },
+    {
+      name: "khangcat-worker",
+      script: "src/worker.js",
+      cwd: "/var/www/khangcat/server",
+      exec_mode: "fork",
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: "350M",
+      kill_timeout: 15000,
+      env: {
+        NODE_ENV: "production",
+        QUEUE_DRIVER: "redis",
+      },
+      error_file: "/var/log/khangcat/worker-error.log",
+      out_file: "/var/log/khangcat/worker-out.log",
+      merge_logs: true,
+      time: true,
+    },
+  ],
+};

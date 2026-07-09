@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: khangcatdesigndemo
+    env: docker
+    plan: starter
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SITE_URL
+        value: https://khangcatdesigndemo.com/
+      - key: ALLOWED_ORIGINS
+        value: https://khangcatdesigndemo.com,https://www.khangcatdesigndemo.com
+      - key: TRUST_PROXY
+        value: true
+      - key: DB_DRIVER
+        value: sqlite
+      - key: SQLITE_FILE
+        value: ./data/leads.db
+      - key: QUEUE_DRIVER
+        value: inline
+      - key: EMAIL_PROVIDER
+        value: smtp
+      - key: EMAIL_FROM
+        value: KHANGCAT Design <hoangphung217205@gmail.com>
+      - key: REPLY_TO
+        value: huukha.k.arc@gmail.com
+      - key: ADMIN_EMAILS
+        value: huukha.k.arc@gmail.com,hoangphung217205@gmail.com
+      - key: SEND_STATUS_EMAILS
+        value: true
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 465
+      - key: SMTP_SECURE
+        value: true
+      - key: SMTP_USER
+        value: hoangphung217205@gmail.com
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: SMTP_PASS
+        sync: false
