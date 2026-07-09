@@ -15,7 +15,7 @@ services:
       - key: SITE_URL
         value: https://khangcatdesigndemo.com/
       - key: ALLOWED_ORIGINS
-        value: https://khangcatdesigndemo.com,https://www.khangcatdesigndemo.com
+        value: https://khangcatdesigndemo.com,https://www.khangcatdesigndemo.com,https://khangcatdesigndemo.onrender.com
       - key: TRUST_PROXY
         value: true
       - key: DB_DRIVER
