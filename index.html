@@ -139,6 +139,7 @@
         text-decoration: none;
         color: var(--ink);
         gap: 14px;
+        margin-left: 14px;
       }
       .mark {
         width: 88px;
@@ -155,7 +156,7 @@
         letter-spacing: 0.08em;
       }
       .wordmark {
-        font-size: 23px;
+        font-size: 21px;
         font-weight: 900;
         letter-spacing: 0.02em;
       }
@@ -274,14 +275,12 @@
       }
       .intro-grid {
         display: grid;
-        grid-template-columns: 0.78fr 1.22fr;
-        gap: 64px;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: 0;
+        align-items: start;
       }
       .intro-art {
-        position: relative;
-        max-width: 460px;
-        justify-self: center;
+        display: none;
       }
       .intro-art img {
         width: 100%;
@@ -306,19 +305,34 @@
         font-size: 14px;
       }
       .intro-copy h2 {
-        font-size: clamp(27px, 2.4vw, 40px);
+        font-size: clamp(24px, 2.1vw, 30px);
+        max-width: 640px;
       }
       .intro-copy p {
         color: var(--muted);
         margin: 18px 0;
         line-height: 1.75;
       }
+      .intro-copy {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+        gap: 72px;
+        align-items: start;
+      }
+      .intro-copy .eyebrow,
+      .intro-copy h2,
+      .intro-copy > p {
+        grid-column: 1;
+      }
       .philosophy-card {
-        margin-top: 24px;
+        grid-column: 2;
+        grid-row: 1 / span 5;
+        margin-top: 0;
         background: var(--soft);
         border-left: 5px solid var(--green);
         border-radius: 10px;
-        padding: 24px 26px;
+        padding: 38px 40px;
+        min-height: 305px;
       }
       .philosophy-card h3 {
         color: var(--green);
@@ -403,9 +417,16 @@
         flex-wrap: wrap;
       }
       #portfolio .section-head {
+        width: min(1480px, calc(100% - 32px));
+        margin-left: auto;
+        margin-right: auto;
         align-items: flex-start;
         flex-direction: column;
         gap: 18px;
+      }
+      #portfolio .container {
+        width: 100%;
+        max-width: none;
       }
       #portfolio .filters {
         width: 100%;
@@ -436,14 +457,17 @@
         transform: translateY(-1px);
       }
       .project-grid {
-        columns: 3 280px;
-        column-gap: 18px;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        columns: 3 420px;
+        column-gap: 10px;
       }
       .project {
         position: relative;
         break-inside: avoid;
-        margin-bottom: 18px;
-        border-radius: 16px;
+        margin-bottom: 10px;
+        border-radius: 10px;
         overflow: hidden;
         background: #ddd;
         cursor: pointer;
@@ -462,15 +486,15 @@
       .project img {
         width: 100%;
         display: block;
-        min-height: 250px;
+        min-height: 340px;
         object-fit: cover;
         transition: 0.6s;
       }
       .project:nth-child(3n + 1) img {
-        height: 430px;
+        height: 560px;
       }
       .project:nth-child(3n + 2) img {
-        height: 330px;
+        height: 420px;
       }
       .project:hover img {
         transform: scale(1.055);
@@ -746,10 +770,10 @@
         display: flex;
       }
       .project-modal {
-        width: min(1500px, 96vw);
+        width: min(1760px, 98vw);
         height: min(900px, 94vh);
         display: grid;
-        grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
+        grid-template-columns: minmax(0, 1fr) clamp(290px, 21vw, 360px);
         background: #fff;
         border-radius: 20px;
         overflow: hidden;
@@ -758,7 +782,7 @@
       }
       .modal-gallery {
         overflow: auto;
-        padding: 22px;
+        padding: 22px 18px 22px 22px;
         background: #eef1ef;
       }
       .gallery-head {
@@ -771,40 +795,45 @@
         font-size: 13px;
       }
       .gallery-grid {
-        columns: 3 220px;
-        column-gap: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
       }
       .gallery-grid img {
         width: 100%;
+        height: 250px;
         display: block;
-        margin-bottom: 12px;
         border-radius: 10px;
         cursor: zoom-in;
         background: #dfe3e0;
+        object-fit: cover;
       }
       .gallery-grid img:hover {
         filter: brightness(0.9);
       }
       .inquiry {
-        padding: 30px;
+        padding: 28px 24px;
         overflow: auto;
       }
       .inquiry .mark {
-        margin-bottom: 26px;
+        width: 78px;
+        height: 45px;
+        font-size: 13px;
+        margin-bottom: 24px;
       }
       .inquiry h2 {
-        font-size: 25px;
+        font-size: 24px;
         line-height: 1.2;
       }
       .inquiry .desc {
         color: var(--muted);
-        font-size: 13px;
-        margin: 9px 0 20px;
+        font-size: 12.5px;
+        margin: 9px 0 18px;
       }
       .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 11px;
+        gap: 10px;
       }
       .field {
         display: grid;
@@ -824,7 +853,7 @@
         width: 100%;
         border: 1px solid var(--line);
         border-radius: 9px;
-        padding: 11px 12px;
+        padding: 10px 11px;
         outline: none;
         background: #fff;
       }
@@ -834,7 +863,7 @@
         box-shadow: 0 0 0 3px rgba(31, 122, 67, 0.1);
       }
       .field textarea {
-        min-height: 90px;
+        min-height: 78px;
         resize: vertical;
       }
       .file-note {
@@ -883,10 +912,38 @@
       }
       .lightbox img {
         max-width: 92vw;
-        max-height: 84vh;
+        max-height: 78vh;
         object-fit: contain;
         transition: transform 0.12s;
         user-select: none;
+      }
+      .lb-nav {
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 32px;
+        font-weight: 500;
+        display: grid;
+        place-items: center;
+        backdrop-filter: blur(10px);
+        transition: 0.2s;
+      }
+      .lb-nav:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-50%) scale(1.06);
+      }
+      .lb-prev {
+        left: 42px;
+      }
+      .lb-next {
+        right: 42px;
       }
       .lb-top {
         position: absolute;
@@ -932,6 +989,45 @@
       }
       .lb-tools button:hover {
         background: rgba(255, 255, 255, 0.16);
+      }
+      .lb-thumbs {
+        position: absolute;
+        z-index: 2;
+        left: 50%;
+        bottom: 82px;
+        transform: translateX(-50%);
+        width: min(760px, 82vw);
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 8px;
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(10px);
+        scrollbar-width: thin;
+      }
+      .lb-thumbs button {
+        flex: 0 0 58px;
+        width: 58px;
+        height: 42px;
+        border: 2px solid transparent;
+        border-radius: 9px;
+        overflow: hidden;
+        padding: 0;
+        background: transparent;
+        opacity: 0.62;
+        transition: 0.2s;
+      }
+      .lb-thumbs button.active,
+      .lb-thumbs button:hover {
+        opacity: 1;
+        border-color: #fff;
+      }
+      .lb-thumbs img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
       }
       .success-card,
       .email-card {
@@ -1377,11 +1473,16 @@
           grid-template-columns: 1fr;
           gap: 40px;
         }
-        .intro-art {
-          order: 2;
+        .intro-copy {
+          grid-template-columns: 1fr;
+          gap: 20px;
         }
-        .intro-badge {
-          right: 10px;
+        .intro-copy .eyebrow,
+        .intro-copy h2,
+        .intro-copy > p,
+        .philosophy-card {
+          grid-column: 1;
+          grid-row: auto;
         }
         .service-grid {
           grid-template-columns: 1fr 1fr;
@@ -1430,7 +1531,7 @@
           width: 68px;
         }
         .wordmark {
-          font-size: 18px;
+          font-size: 17px;
         }
         .hero-content {
           padding: 70px 0;
@@ -1466,6 +1567,10 @@
         .intro-art img {
           height: 420px;
         }
+        .philosophy-card {
+          padding: 26px 24px;
+          min-height: auto;
+        }
         .logo-row {
           grid-template-columns: 1fr 1fr;
         }
@@ -1496,6 +1601,26 @@
           height: 48px;
           flex-basis: 48px;
         }
+        .lb-nav {
+          width: 46px;
+          height: 46px;
+          font-size: 26px;
+        }
+        .lb-prev {
+          left: 14px;
+        }
+        .lb-next {
+          right: 14px;
+        }
+        .lb-thumbs {
+          bottom: 76px;
+          width: 92vw;
+        }
+        .lb-thumbs button {
+          flex-basis: 48px;
+          width: 48px;
+          height: 36px;
+        }
         .project-modal {
           width: 100vw;
           height: 100svh;
@@ -1508,7 +1633,11 @@
           padding: 14px;
         }
         .gallery-grid {
-          columns: 2 130px;
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .gallery-grid img {
+          height: 180px;
         }
         .inquiry {
           padding: 20px;
@@ -1938,7 +2067,10 @@
       <div class="lightbox-stage" id="lightboxStage">
         <div class="lb-top" id="lbCounter">1 / 1</div>
         <button class="icon-btn lb-close" onclick="closeLightbox()">×</button
+        ><button class="lb-nav lb-prev" onclick="lightboxMove(-1)" aria-label="Ảnh trước">‹</button
+        ><button class="lb-nav lb-next" onclick="lightboxMove(1)" aria-label="Ảnh tiếp theo">›</button
         ><img id="lbImage" alt="Ảnh dự án phóng to" />
+        <div class="lb-thumbs" id="lbThumbs" aria-label="Chọn nhanh ảnh"></div>
         <div class="lb-tools">
           <button onclick="lightboxMove(-1)">←</button
           ><button onclick="zoomBy(-.25)">−</button
@@ -2413,13 +2545,27 @@
       function openLightbox(i) {
         lbIndex = i;
         lbScale = 1;
+        renderLightboxThumbs();
         updateLightbox();
         openOverlay("lightbox");
+      }
+      function renderLightboxThumbs() {
+        if (!activeProject) return;
+        $("#lbThumbs").innerHTML = Array.from(
+          { length: activeProject.count },
+          (_, i) =>
+            `<button type="button" data-index="${i}" aria-label="Xem ảnh ${i + 1}"><img src="images/${activeProject.folder}/${i + 1}.jpg" alt=""></button>`,
+        ).join("");
       }
       function updateLightbox() {
         if (!activeProject) return;
         $("#lbImage").src = `images/${activeProject.folder}/${lbIndex + 1}.jpg`;
         $("#lbCounter").textContent = `${lbIndex + 1} / ${activeProject.count}`;
+        $$("#lbThumbs button").forEach((btn) => {
+          btn.classList.toggle("active", Number(btn.dataset.index) === lbIndex);
+        });
+        const activeThumb = $("#lbThumbs button.active");
+        activeThumb?.scrollIntoView({ inline: "center", block: "nearest" });
         resetZoom();
       }
       function lightboxMove(n) {
@@ -2450,6 +2596,16 @@
       );
       $("#lightboxStage").addEventListener("click", (e) => {
         if (e.target === $("#lightboxStage")) closeLightbox();
+      });
+      $("#lbImage").addEventListener("click", (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        lightboxMove(e.clientX - rect.left > rect.width / 2 ? 1 : -1);
+      });
+      $("#lbThumbs").addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        lbIndex = Number(btn.dataset.index);
+        updateLightbox();
       });
       $("#lightboxStage").addEventListener(
         "touchstart",
