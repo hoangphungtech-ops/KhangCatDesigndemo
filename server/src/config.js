@@ -24,8 +24,10 @@ const bool = (value, fallback = false) => {
   return String(value).toLowerCase() === "true";
 };
 
-const requestedEmailProvider = String(process.env.EMAIL_PROVIDER || "").toLowerCase();
-const resendKey = process.env.RESEND_API_KEY || "";
+const env = (name) => String(process.env[name] || "").trim().replace(/^['"]|['"]$/g, "");
+
+const requestedEmailProvider = env("EMAIL_PROVIDER").toLowerCase();
+const resendKey = env("RESEND_API_KEY");
 const emailProvider =
   resendKey && (!requestedEmailProvider || requestedEmailProvider === "smtp")
     ? "resend"
@@ -64,8 +66,8 @@ const config = {
     user: process.env.SMTP_USER || "",
     pass: process.env.SMTP_PASS || "",
   },
-  postmarkToken: process.env.POSTMARK_SERVER_TOKEN || "",
-  sendgridKey: process.env.SENDGRID_API_KEY || "",
+  postmarkToken: env("POSTMARK_SERVER_TOKEN"),
+  sendgridKey: env("SENDGRID_API_KEY"),
   resendKey,
   crmWebhookUrl: process.env.CRM_WEBHOOK_URL || "",
   crmWebhookSecret: process.env.CRM_WEBHOOK_SECRET || "",
@@ -83,7 +85,14 @@ const config = {
 function emailConfigured() {
   if (config.emailProvider === "postmark") return Boolean(config.postmarkToken);
   if (config.emailProvider === "sendgrid") return Boolean(config.sendgridKey);
-  if (config.emailProvider === "resend") return Boolean(config.resendKey);
+  if (config.emailProvider === "resend") {
+    return (
+      Boolean(config.resendKey) &&
+      config.resendKey.startsWith("re_") &&
+      !config.resendKey.includes("xxxxxxxx") &&
+      !config.resendKey.includes(" ")
+    );
+  }
   if (config.emailProvider === "console") return true;
   return Boolean(
     config.smtp.user &&

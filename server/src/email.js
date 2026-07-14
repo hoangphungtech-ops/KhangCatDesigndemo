@@ -74,6 +74,11 @@ async function sendgrid(message) {
 }
 
 async function resend(message) {
+  if (!config.resendKey || !config.resendKey.startsWith("re_")) {
+    throw new Error(
+      "Resend API key không hợp lệ. Vào Render > Environment, đặt RESEND_API_KEY bằng key thật bắt đầu bằng re_.",
+    );
+  }
   if (!resendClient) resendClient = new Resend(config.resendKey);
   const { data, error } = await resendClient.emails.send({
     from: resendFromAddress(),
@@ -85,6 +90,11 @@ async function resend(message) {
     tags: [{ name: "event", value: message.tag || "lead-notification" }],
   });
   if (error) {
+    if (/api key/i.test(error.message || "")) {
+      throw new Error(
+        "Resend API key không hợp lệ hoặc đã bị thu hồi. Tạo API key mới trong Resend rồi cập nhật RESEND_API_KEY trên Render.",
+      );
+    }
     throw new Error(error.message || "Không gửi được email qua Resend");
   }
   return data;
