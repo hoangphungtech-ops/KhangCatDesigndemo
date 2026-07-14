@@ -24,6 +24,13 @@ const bool = (value, fallback = false) => {
   return String(value).toLowerCase() === "true";
 };
 
+const requestedEmailProvider = String(process.env.EMAIL_PROVIDER || "").toLowerCase();
+const resendKey = process.env.RESEND_API_KEY || "";
+const emailProvider =
+  resendKey && (!requestedEmailProvider || requestedEmailProvider === "smtp")
+    ? "resend"
+    : requestedEmailProvider || "smtp";
+
 const config = {
   env: process.env.NODE_ENV || "development",
   port: Number(process.env.PORT || 3000),
@@ -43,7 +50,7 @@ const config = {
     process.env.SQLITE_FILE || path.join(__dirname, "..", "data", "leads.db"),
   queueDriver: process.env.QUEUE_DRIVER || "inline",
   redisUrl: process.env.REDIS_URL || "redis://127.0.0.1:6379",
-  emailProvider: String(process.env.EMAIL_PROVIDER || "smtp").toLowerCase(),
+  emailProvider,
   emailFrom:
     process.env.EMAIL_FROM ||
     process.env.SMTP_FROM ||
@@ -59,7 +66,7 @@ const config = {
   },
   postmarkToken: process.env.POSTMARK_SERVER_TOKEN || "",
   sendgridKey: process.env.SENDGRID_API_KEY || "",
-  resendKey: process.env.RESEND_API_KEY || "",
+  resendKey,
   crmWebhookUrl: process.env.CRM_WEBHOOK_URL || "",
   crmWebhookSecret: process.env.CRM_WEBHOOK_SECRET || "",
   slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || "",

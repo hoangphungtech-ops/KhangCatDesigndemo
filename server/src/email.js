@@ -14,6 +14,15 @@ function fromParts(value) {
     : { name: "KHANGCAT Design", email: String(value).trim() };
 }
 
+function resendFromAddress() {
+  const value = config.emailFrom || "KhangCat Design <onboarding@resend.dev>";
+  const sender = fromParts(value).email.toLowerCase();
+  if (/@(gmail|googlemail|yahoo|outlook|hotmail|icloud)\./.test(sender)) {
+    return "KhangCat Design <onboarding@resend.dev>";
+  }
+  return value;
+}
+
 async function postmark(message) {
   const response = await fetch("https://api.postmarkapp.com/email", {
     method: "POST",
@@ -67,7 +76,7 @@ async function sendgrid(message) {
 async function resend(message) {
   if (!resendClient) resendClient = new Resend(config.resendKey);
   const { data, error } = await resendClient.emails.send({
-    from: config.emailFrom || "KhangCat Design <onboarding@resend.dev>",
+    from: resendFromAddress(),
     to: message.to,
     replyTo: message.replyTo || config.replyTo || undefined,
     subject: message.subject,
