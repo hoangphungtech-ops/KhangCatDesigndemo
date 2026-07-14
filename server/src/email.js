@@ -1,9 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 const { config, emailConfigured } = require("./config");
 
 let smtpTransport;
+let resendClient;
 
 function fromParts(value) {
   const match = String(value).match(/^\s*(.*?)\s*<([^>]+)>\s*$/);
@@ -62,6 +64,23 @@ async function sendgrid(message) {
   return { messageId: response.headers.get("x-message-id") };
 }
 
+async function resend(message) {
+  if (!resendClient) resendClient = new Resend(config.resendKey);
+  const { data, error } = await resendClient.emails.send({
+    from: config.emailFrom || "KhangCat Design <onboarding@resend.dev>",
+    to: message.to,
+    replyTo: message.replyTo || config.replyTo || undefined,
+    subject: message.subject,
+    html: message.html,
+    text: message.text,
+    tags: [{ name: "event", value: message.tag || "lead-notification" }],
+  });
+  if (error) {
+    throw new Error(error.message || "Không gửi được email qua Resend");
+  }
+  return data;
+}
+
 async function smtp(message) {
   if (!smtpTransport) {
     smtpTransport = nodemailer.createTransport({
@@ -100,7 +119,11 @@ async function sendEmail(message) {
   }
   if (config.emailProvider === "postmark") return postmark(message);
   if (config.emailProvider === "sendgrid") return sendgrid(message);
+  if (config.emailProvider === "resend") return resend(message);
   if (config.emailProvider === "console") return consoleEmail(message);
+  if (config.emailProvider !== "smtp") {
+    throw new Error(`Email provider '${config.emailProvider}' không được hỗ trợ.`);
+  }
   return smtp(message);
 }
 

@@ -25,9 +25,9 @@ services:
       - key: QUEUE_DRIVER
         value: inline
       - key: EMAIL_PROVIDER
-        value: smtp
+        value: resend
       - key: EMAIL_FROM
-        value: KHANGCAT Design <hoangphung217205@gmail.com>
+        value: KhangCat Design <onboarding@resend.dev>
       - key: REPLY_TO
         value: huukha.k.arc@gmail.com
       - key: ADMIN_EMAILS
@@ -43,6 +43,8 @@ services:
       - key: SMTP_USER
         value: hoangphung217205@gmail.com
       - key: ADMIN_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
         sync: false
       - key: SMTP_PASS
         sync: false

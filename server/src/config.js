@@ -43,7 +43,7 @@ const config = {
     process.env.SQLITE_FILE || path.join(__dirname, "..", "data", "leads.db"),
   queueDriver: process.env.QUEUE_DRIVER || "inline",
   redisUrl: process.env.REDIS_URL || "redis://127.0.0.1:6379",
-  emailProvider: process.env.EMAIL_PROVIDER || "smtp",
+  emailProvider: String(process.env.EMAIL_PROVIDER || "smtp").toLowerCase(),
   emailFrom:
     process.env.EMAIL_FROM ||
     process.env.SMTP_FROM ||
@@ -59,6 +59,7 @@ const config = {
   },
   postmarkToken: process.env.POSTMARK_SERVER_TOKEN || "",
   sendgridKey: process.env.SENDGRID_API_KEY || "",
+  resendKey: process.env.RESEND_API_KEY || "",
   crmWebhookUrl: process.env.CRM_WEBHOOK_URL || "",
   crmWebhookSecret: process.env.CRM_WEBHOOK_SECRET || "",
   slackWebhookUrl: process.env.SLACK_WEBHOOK_URL || "",
@@ -75,6 +76,7 @@ const config = {
 function emailConfigured() {
   if (config.emailProvider === "postmark") return Boolean(config.postmarkToken);
   if (config.emailProvider === "sendgrid") return Boolean(config.sendgridKey);
+  if (config.emailProvider === "resend") return Boolean(config.resendKey);
   if (config.emailProvider === "console") return true;
   return Boolean(
     config.smtp.user &&
