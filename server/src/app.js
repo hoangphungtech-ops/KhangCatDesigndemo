@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+const { rateLimit } = require("express-rate-limit");
 const { config, emailConfigured } = require("./config");
 const { initDatabase, closeDatabase } = require("./db");
 const { startDispatcher, stopQueue } = require("./queue");
@@ -14,24 +15,54 @@ async function createApp() {
   await initDatabase();
   const app = express();
   if (config.trustProxy) app.set("trust proxy", 1);
+  app.disable("x-powered-by");
 
   app.use(
     helmet({
       contentSecurityPolicy: false,
       crossOriginResourcePolicy: { policy: "cross-origin" },
+      referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+      hsts: config.env === "production" ? { maxAge: 31_536_000, includeSubDomains: true } : false,
     }),
   );
+
+  app.use((req, res, next) => {
+    res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=()");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    if (req.path.startsWith("/api/")) {
+      res.setHeader("Cache-Control", "no-store");
+    }
+    next();
+  });
+
+  app.use(
+    "/api",
+    rateLimit({
+      windowMs: 60_000,
+      limit: config.publicRateLimitPerMinute,
+      standardHeaders: "draft-8",
+      legacyHeaders: false,
+      message: {
+        success: false,
+        message: "Hệ thống đang nhận quá nhiều yêu cầu. Vui lòng thử lại sau.",
+      },
+    }),
+  );
+
   app.use(
     cors({
       origin(origin, callback) {
         if (!origin || config.allowedOrigins.includes(origin)) {
           return callback(null, true);
         }
-        return callback(new Error("Origin không được phép."));
+        const error = new Error("Origin không được phép.");
+        error.status = 403;
+        return callback(error);
       },
     }),
   );
-  app.use(express.json({ limit: "1mb" }));
+
+  app.use(express.json({ limit: "1mb", type: "application/json" }));
 
   app.get("/api/health", async (req, res) => {
     let emailVerified = null;
@@ -69,9 +100,12 @@ async function createApp() {
   app.use((error, req, res, next) => {
     console.error(`[${req.method} ${req.path}]`, error.message);
     if (res.headersSent) return next(error);
-    return res.status(500).json({
+    return res.status(error.status || 500).json({
       success: false,
-      message: "Hệ thống đang bận. Yêu cầu chưa được ghi nhận, vui lòng thử lại.",
+      message:
+        error.status === 403
+          ? "Nguồn truy cập không được phép."
+          : "Hệ thống đang bận. Yêu cầu chưa được ghi nhận, vui lòng thử lại.",
     });
   });
 

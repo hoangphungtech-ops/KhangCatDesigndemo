@@ -34,6 +34,14 @@ services:
         value: huukha.k.arc@gmail.com,hoangphung217205@gmail.com
       - key: SEND_STATUS_EMAILS
         value: true
+      - key: PUBLIC_RATE_LIMIT_PER_MINUTE
+        value: 120
+      - key: ORDER_RATE_LIMIT_PER_MINUTE
+        value: 5
+      - key: CLIENT_RATE_LIMIT_PER_MINUTE
+        value: 8
+      - key: ADMIN_RATE_LIMIT_PER_MINUTE
+        value: 60
       - key: SMTP_HOST
         value: smtp.gmail.com
       - key: SMTP_PORT

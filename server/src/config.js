@@ -45,7 +45,7 @@ const config = {
     process.env.ADMIN_EMAILS ||
       "huukha.k.arc@gmail.com,hoangphung217205@gmail.com",
   ),
-  adminApiKey: process.env.ADMIN_API_KEY || "",
+  adminApiKey: env("ADMIN_API_KEY"),
   dbDriver: process.env.DB_DRIVER || "sqlite",
   databaseUrl: process.env.DATABASE_URL || "",
   sqliteFile:
@@ -80,6 +80,10 @@ const config = {
   crmBaseUrl: process.env.CRM_BASE_URL || "",
   workerConcurrency: Number(process.env.WORKER_CONCURRENCY || 5),
   trustProxy: bool(process.env.TRUST_PROXY, false),
+  publicRateLimitPerMinute: Number(process.env.PUBLIC_RATE_LIMIT_PER_MINUTE || 120),
+  orderRateLimitPerMinute: Number(process.env.ORDER_RATE_LIMIT_PER_MINUTE || 5),
+  clientRateLimitPerMinute: Number(process.env.CLIENT_RATE_LIMIT_PER_MINUTE || 8),
+  adminRateLimitPerMinute: Number(process.env.ADMIN_RATE_LIMIT_PER_MINUTE || 60),
 };
 
 function emailConfigured() {
