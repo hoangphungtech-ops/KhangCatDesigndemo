@@ -2191,6 +2191,174 @@
           min-height: 44px;
         }
       }
+      /* LIMITLESS UPGRADE: premium operating layer */
+      .ops-strip {
+        margin-top: 18px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .ops-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        backdrop-filter: blur(14px);
+      }
+      .ops-chip::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #45d483;
+        box-shadow: 0 0 0 5px rgba(69, 212, 131, 0.12);
+      }
+      .project::after {
+        background:
+          linear-gradient(180deg, rgba(2, 8, 20, 0.08), rgba(2, 8, 20, 0.82)),
+          radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.2), transparent 30%);
+      }
+      .project {
+        isolation: isolate;
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+      }
+      .project:hover {
+        box-shadow: 0 34px 90px rgba(15, 23, 42, 0.22);
+      }
+      .inquiry {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 249, 246, 0.98)),
+          radial-gradient(circle at top right, rgba(31, 122, 67, 0.12), transparent 35%);
+      }
+      .form-progress {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 18px 0;
+      }
+      .form-progress span {
+        padding: 9px 10px;
+        border-radius: 12px;
+        background: #f3f7f4;
+        color: #667085;
+        font-size: 11px;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .form-progress span.active {
+        background: #e9f8ef;
+        color: #1f7a43;
+      }
+      .field-hint {
+        display: block;
+        margin-top: 6px;
+        color: #7b8794;
+        font-size: 11px;
+        line-height: 1.4;
+      }
+      .admin-health {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 14px 0 18px;
+      }
+      .admin-health-card {
+        padding: 14px;
+        border-radius: 16px;
+        background: #f6faf7;
+        border: 1px solid rgba(31, 122, 67, 0.12);
+      }
+      .admin-health-card small {
+        display: block;
+        color: #667085;
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .admin-health-card b {
+        display: block;
+        margin-top: 6px;
+        color: #142033;
+        font-size: 17px;
+      }
+      .status-badge,
+      .sla-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+      .status-badge.new,
+      .sla-badge.hot {
+        background: #fff1f2;
+        color: #be123c;
+      }
+      .status-badge.progress,
+      .sla-badge.warm {
+        background: #fff7ed;
+        color: #c2410c;
+      }
+      .status-badge.done,
+      .sla-badge.ok {
+        background: #ecfdf3;
+        color: #047857;
+      }
+      .admin-row-primary {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .admin-row-primary small {
+        color: #667085;
+        font-weight: 800;
+      }
+      .email-preview {
+        border: 1px solid rgba(20, 32, 51, 0.08);
+        box-shadow: 0 26px 80px rgba(15, 23, 42, 0.12);
+      }
+      .mail-cta {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .client-timeline {
+        margin-top: 20px;
+        display: grid;
+        gap: 10px;
+      }
+      .client-timeline div {
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: #f6faf7;
+        border-left: 4px solid #1f7a43;
+        color: #344054;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      @media (max-width: 820px) {
+        .admin-health {
+          grid-template-columns: 1fr 1fr;
+        }
+        .form-progress {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -3559,6 +3727,166 @@
         a.click();
         URL.revokeObjectURL(a.href);
       }
+      function statusClass(status) {
+        if (status === "Hoàn thành" || status === "HoÃ n thÃ nh") return "done";
+        if (status === "Mới tiếp nhận" || status === "Má»›i tiáº¿p nháº­n") return "new";
+        return "progress";
+      }
+      function leadSla(row) {
+        const hours = Math.max(0, (Date.now() - new Date(row.date).getTime()) / 36e5);
+        if (row.status === "Hoàn thành" || row.status === "HoÃ n thÃ nh") {
+          return { label: "Đã hoàn thành", cls: "ok" };
+        }
+        if (hours <= 4) return { label: "Ưu tiên gọi ngay", cls: "hot" };
+        if (hours <= 24) return { label: "Trong ngày", cls: "warm" };
+        return { label: "Cần xử lý gấp", cls: "hot" };
+      }
+      function statusOptions(selected) {
+        return ["Mới tiếp nhận", "Đã liên hệ", "Khảo sát", "Báo giá", "Thiết kế", "Thi công", "Hoàn thành"]
+          .map((s) => `<option ${selected === s ? "selected" : ""}>${s}</option>`)
+          .join("");
+      }
+      Object.assign(STATUS_TO_API, {
+        "Mới tiếp nhận": "new",
+        "Đã liên hệ": "contacted",
+        "Khảo sát": "survey",
+        "Báo giá": "quoted",
+        "Thiết kế": "design",
+        "Thi công": "construction",
+        "Hoàn thành": "completed",
+      });
+      Object.assign(STATUS_FROM_API, {
+        new: "Mới tiếp nhận",
+        contacted: "Đã liên hệ",
+        survey: "Khảo sát",
+        quoted: "Báo giá",
+        design: "Thiết kế",
+        construction: "Thi công",
+        completed: "Hoàn thành",
+      });
+      function renderAdminHealth(all) {
+        const host = $("#adminHealth");
+        if (!host) return;
+        const today = new Date().toISOString().slice(0, 10);
+        const newCount = all.filter((r) => statusClass(r.status) === "new").length;
+        const todayCount = all.filter((r) => String(r.date).slice(0, 10) === today).length;
+        const hotCount = all.filter((r) => leadSla(r).cls === "hot" && statusClass(r.status) !== "done").length;
+        host.innerHTML = [
+          ["Email", "Resend verified"],
+          ["Lead mới", newCount],
+          ["Hôm nay", todayCount],
+          ["Ưu tiên", hotCount],
+        ]
+          .map(([k, v]) => `<div class="admin-health-card"><small>${k}</small><b>${v}</b></div>`)
+          .join("");
+      }
+      renderAdmin = function () {
+        const all = requests();
+        const q = $("#adminSearch").value.toLowerCase();
+        const f = $("#adminFilter").value;
+        const selectedDate = $("#adminDate").value;
+        const employee = $("#adminEmployee").value.toLowerCase();
+        const normalized = (value) => String(value || "").toLowerCase();
+        const rows = all.filter((r) => {
+          const status = r.status || "Mới tiếp nhận";
+          return (
+            (f === "all" || status === f) &&
+            (!selectedDate || String(r.date).slice(0, 10) === selectedDate) &&
+            (!employee || normalized(r.assignedTo).includes(employee)) &&
+            [r.code, r.name, r.phone, r.project, r.email].join(" ").toLowerCase().includes(q)
+          );
+        });
+        $("#statTotal").textContent = all.length;
+        $("#statNew").textContent = all.filter((r) => statusClass(r.status) === "new").length;
+        $("#statProcess").textContent = all.filter((r) => statusClass(r.status) === "progress").length;
+        $("#statDone").textContent = all.filter((r) => statusClass(r.status) === "done").length;
+        renderAdminHealth(all);
+        $("#adminRows").innerHTML = rows.length
+          ? rows
+              .map((r, i) => {
+                const sla = leadSla(r);
+                const status = r.status || "Mới tiếp nhận";
+                return `<tr>
+                  <td>${i + 1}</td>
+                  <td><div class="admin-row-primary"><b>${esc(r.code)}</b><small>${esc(r.email || "")}</small></div></td>
+                  <td><b>${esc(r.name)}</b><br><span class="sla-badge ${sla.cls}">${sla.label}</span></td>
+                  <td>${esc(r.phone)}</td>
+                  <td>${esc(r.project)}</td>
+                  <td>${new Date(r.date).toLocaleString("vi-VN")}</td>
+                  <td>${esc(r.assignedTo || "Chưa phân công")}</td>
+                  <td><span class="status-badge ${statusClass(status)}">${esc(status)}</span><br><select class="status-select" onchange="setStatus('${r.code}',this.value)">${statusOptions(status)}</select></td>
+                  <td><div class="row-actions">${statusClass(status) === "new" ? `<button class="mini" onclick="setStatus('${r.code}','Đã liên hệ')">Tiếp nhận</button>` : ""}<button class="mini" onclick="assignLead('${r.code}')">Phân công</button><button class="mini" onclick="previewRequest('${r.code}')">Email</button><button class="mini danger" onclick="deleteRequest('${r.code}')">Xóa</button></div></td>
+                </tr>`;
+              })
+              .join("")
+          : `<tr><td colspan="9" class="empty">Chưa có yêu cầu phù hợp.</td></tr>`;
+      };
+      mailMarkup = function (type, r) {
+        const admin = type === "admin";
+        const rows = [
+          ["Mã hồ sơ", r.code],
+          ["Dự án", r.project],
+          ["Diện tích", r.area || "—"],
+          ["Ngân sách", r.budget || "—"],
+          ["Phong cách", r.style || "—"],
+          ["Tên khách", r.name],
+          ["Số điện thoại", r.phone],
+          ["Email", r.email],
+          ["Địa chỉ", r.address || "—"],
+          ["Nội dung", r.message],
+          ["File", r.file || "Không có"],
+          ["Trạng thái", r.status || "Đã nhận"],
+        ]
+          .map(([k, v]) => `<tr><td>${esc(k)}</td><td><b>${esc(v)}</b></td></tr>`)
+          .join("");
+        return `<div class="email-preview">
+          <div class="mail-head"><small>${admin ? "THÔNG BÁO CRM" : "KHANGCAT DESIGN"}</small><h2>${admin ? "Có yêu cầu mới" : "Đã xác nhận"}</h2></div>
+          <div class="status-track">
+            <div class="track-step done"><div class="track-dot">✓</div>Đã gửi yêu cầu</div>
+            <div class="track-step active"><div class="track-dot">2</div>Đang xử lý</div>
+            <div class="track-step"><div class="track-dot">3</div>Hoàn thành</div>
+          </div>
+          <div class="mail-body">
+            ${admin ? `<p style="font-size:12px;color:var(--muted);margin-bottom:10px"><b>Gửi đến:</b> ${CONFIG.adminEmails.map(esc).join(", ")}</p>` : ""}
+            <p>${admin ? `Hệ thống vừa nhận một yêu cầu tư vấn mới. Vui lòng gọi khách trong thời gian sớm nhất.` : `Xin chào <b>${esc(r.name)}</b>, KHANGCAT đã nhận được yêu cầu của bạn và sẽ sớm liên hệ.`}</p>
+            <h3 style="color:var(--green);margin-top:20px">Tóm tắt yêu cầu</h3>
+            <table class="summary">${rows}</table>
+            <div class="mail-cta"><a class="btn btn-primary" href="#" onclick="event.preventDefault();closeOverlay('emailOverlay');${admin ? "openAdmin()" : "openClientLogin()"}">${admin ? "Mở Dashboard xử lý" : "Xem tiến độ yêu cầu"}</a></div>
+          </div>
+        </div>`;
+      };
+      function initLimitlessUpgrade() {
+        const heroContent = document.querySelector(".hero-content");
+        if (heroContent && !heroContent.querySelector(".ops-strip")) {
+          const strip = document.createElement("div");
+          strip.className = "ops-strip";
+          strip.innerHTML = `<span class="ops-chip">CRM online 24/7</span><span class="ops-chip">Email admin qua Resend</span><span class="ops-chip">Tra cứu tiến độ bằng SĐT</span>`;
+          heroContent.appendChild(strip);
+        }
+        const adminTools = document.querySelector(".admin-tools");
+        if (adminTools && !document.getElementById("adminHealth")) {
+          const health = document.createElement("div");
+          health.id = "adminHealth";
+          health.className = "admin-health";
+          adminTools.parentNode.insertBefore(health, adminTools);
+        }
+        const form = document.getElementById("inquiryForm");
+        if (form && !form.querySelector(".form-progress")) {
+          const progress = document.createElement("div");
+          progress.className = "form-progress";
+          progress.innerHTML = `<span class="active">1. Thông tin</span><span>2. Nhu cầu</span><span>3. Gửi CRM</span>`;
+          form.insertBefore(progress, form.querySelector(".form-grid"));
+        }
+        const msg = document.getElementById("customerMessage");
+        if (msg && !document.getElementById("messageHint")) {
+          const hint = document.createElement("span");
+          hint.id = "messageHint";
+          hint.className = "field-hint";
+          hint.textContent = "Gợi ý: loại công trình, diện tích, ngân sách, thời gian mong muốn.";
+          msg.parentNode.appendChild(hint);
+        }
+      }
+      initLimitlessUpgrade();
       function toast(msg) {
         const t = $("#premiumToast") || $("#toast");
         if (!t) return;
