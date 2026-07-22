@@ -14,6 +14,13 @@ function fromParts(value) {
     : { name: "KHANGCAT Design", email: String(value).trim() };
 }
 
+function recipientsOf(to) {
+  return (Array.isArray(to) ? to : [to])
+    .flatMap((item) => String(item || "").split(","))
+    .map((email) => email.trim())
+    .filter(Boolean);
+}
+
 function resendFromAddress() {
   const value = config.emailFrom || "KhangCat Design <onboarding@resend.dev>";
   const sender = fromParts(value).email.toLowerCase();
@@ -33,7 +40,7 @@ async function postmark(message) {
     },
     body: JSON.stringify({
       From: config.emailFrom,
-      To: Array.isArray(message.to) ? message.to.join(",") : message.to,
+      To: recipientsOf(message.to).join(","),
       ReplyTo: message.replyTo,
       Subject: message.subject,
       HtmlBody: message.html,
@@ -48,9 +55,7 @@ async function postmark(message) {
 
 async function sendgrid(message) {
   const sender = fromParts(config.emailFrom);
-  const recipients = (Array.isArray(message.to) ? message.to : [message.to]).map(
-    (email) => ({ email }),
-  );
+  const recipients = recipientsOf(message.to).map((email) => ({ email }));
   const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
@@ -79,25 +84,44 @@ async function resend(message) {
       "Resend API key không hợp lệ. Vào Render > Environment, đặt RESEND_API_KEY bằng key thật bắt đầu bằng re_.",
     );
   }
+
   if (!resendClient) resendClient = new Resend(config.resendKey);
-  const { data, error } = await resendClient.emails.send({
-    from: resendFromAddress(),
-    to: message.to,
-    replyTo: message.replyTo || config.replyTo || undefined,
-    subject: message.subject,
-    html: message.html,
-    text: message.text,
-    tags: [{ name: "event", value: message.tag || "lead-notification" }],
-  });
-  if (error) {
-    if (/api key/i.test(error.message || "")) {
+
+  const delivered = [];
+  const failed = [];
+  for (const recipient of recipientsOf(message.to)) {
+    const { data, error } = await resendClient.emails.send({
+      from: resendFromAddress(),
+      to: recipient,
+      replyTo: message.replyTo || config.replyTo || undefined,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
+      tags: [{ name: "event", value: message.tag || "lead-notification" }],
+    });
+
+    if (error) {
+      const msg = error.message || "Không gửi được email qua Resend";
+      failed.push({ recipient, error: msg });
+      console.error(`[email:resend] FAILED -> ${recipient}: ${msg}`);
+      continue;
+    }
+
+    delivered.push({ recipient, id: data?.id || data?.messageId || "" });
+    console.log(`[email:resend] DELIVERED -> ${recipient}: ${data?.id || "accepted"}`);
+  }
+
+  if (!delivered.length) {
+    const firstError = failed[0]?.error || "Không gửi được email qua Resend";
+    if (/api key/i.test(firstError)) {
       throw new Error(
         "Resend API key không hợp lệ hoặc đã bị thu hồi. Tạo API key mới trong Resend rồi cập nhật RESEND_API_KEY trên Render.",
       );
     }
-    throw new Error(error.message || "Không gửi được email qua Resend");
+    throw new Error(firstError);
   }
-  return data;
+
+  return { delivered, failed };
 }
 
 async function smtp(message) {
