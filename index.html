@@ -2879,6 +2879,9 @@
           <button class="btn btn-dark" onclick="exportCSV()">
             Xuất Excel (CSV)
           </button>
+          <button class="btn btn-primary" onclick="testAdminEmail()">
+            Test mail admin
+          </button>
         </div>
         <div class="table-wrap">
           <table>
@@ -3690,6 +3693,36 @@
         lastRequest = requests().find((r) => r.code === code);
         closeOverlay("adminOverlay");
         openEmailPreview("admin");
+      }
+      async function testAdminEmail() {
+        if (location.protocol === "file:") {
+          toast("Vui lòng mở website qua server để test mail thật");
+          return;
+        }
+        const key = getAdminApiKey();
+        if (!key) return;
+        toast("Đang gửi email test tới admin...");
+        try {
+          const response = await fetch("/api/admin/test-email", {
+            method: "POST",
+            headers: { Authorization: `Bearer ${key}` },
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok || !result.success) {
+            throw new Error(result.message || "Không gửi được email test");
+          }
+          const delivered = result.result?.delivered || [];
+          const failed = result.result?.failed || [];
+          const ok = delivered.map((item) => item.recipient).join(", ");
+          const bad = failed.map((item) => `${item.recipient}: ${item.error}`).join(" | ");
+          toast(
+            bad
+              ? `Đã gửi tới: ${ok}. Lỗi: ${bad}`
+              : `Resend đã nhận gửi tới admin: ${ok || "OK"}`,
+          );
+        } catch (error) {
+          toast(error.message);
+        }
       }
       function exportCSV() {
         const rows = requests();

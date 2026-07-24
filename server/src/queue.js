@@ -26,8 +26,11 @@ function getQueue() {
 async function dispatchInline(job) {
   await updateOutbox(job.id, "processing");
   try {
-    await processJob(job.job_type, job.payload);
+    const result = await processJob(job.job_type, job.payload);
     await updateOutbox(job.id, "delivered");
+    if (job.job_type.startsWith("email.")) {
+      console.log(`[job:${job.job_type}] delivered`, JSON.stringify(result).slice(0, 600));
+    }
     if (job.job_type === "email.admin") {
       await createOutboxJob(job.payload, "email.customer");
     }

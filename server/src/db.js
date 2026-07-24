@@ -424,6 +424,62 @@ async function createOutboxJob(lead, type) {
     .run(id, lead.id, type, JSON.stringify(lead), now, now, now);
 }
 
+function parsePayload(payload) {
+  if (!payload) return {};
+  if (typeof payload === "object") return payload;
+  try {
+    return JSON.parse(payload);
+  } catch {
+    return {};
+  }
+}
+
+async function listOutboxJobs(limit = 50) {
+  const safeLimit = Math.max(1, Math.min(Number(limit) || 50, 200));
+  if (config.dbDriver === "postgres") {
+    const result = await pgPool.query(
+      `SELECT id, lead_id, job_type, payload, status, attempts, next_run_at, last_error, created_at, updated_at
+       FROM outbox_jobs
+       ORDER BY created_at DESC
+       LIMIT $1`,
+      [safeLimit],
+    );
+    return result.rows.map((row) => ({
+      id: row.id,
+      leadId: row.lead_id,
+      jobType: row.job_type,
+      payload: parsePayload(row.payload),
+      status: row.status,
+      attempts: row.attempts,
+      nextRunAt: row.next_run_at,
+      lastError: row.last_error,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
+  }
+
+  return sqlite
+    .prepare(
+      `SELECT id, lead_id, job_type, payload, status, attempts, next_run_at, last_error, created_at, updated_at
+       FROM outbox_jobs
+       ORDER BY created_at DESC
+       LIMIT ?`,
+    )
+    .all(safeLimit)
+    .map((row) => ({
+      id: row.id,
+      leadId: row.lead_id,
+      jobType: row.job_type,
+      payload: parsePayload(row.payload),
+      status: row.status,
+      attempts: row.attempts,
+      nextRunAt: row.next_run_at,
+      lastError: row.last_error,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
+}
+
 async function updateLeadStatus(code, status, actor = "admin") {
   const now = new Date().toISOString();
   if (config.dbDriver === "postgres") {
@@ -727,6 +783,7 @@ module.exports = {
   listLeads,
   listLeadsByPhone,
   getPendingOutbox,
+  listOutboxJobs,
   updateOutbox,
   createOutboxJob,
   updateLeadStatus,

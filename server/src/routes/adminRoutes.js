@@ -15,6 +15,8 @@ const limiter = rateLimit({
 router.use(limiter);
 router.use(adminAuth);
 router.get("/requests", adminController.list);
+router.get("/outbox", adminController.outbox);
+router.post("/test-email", adminController.testEmail);
 router.patch("/requests/:code/status", adminController.changeStatus);
 router.patch("/requests/:code/assignment", adminController.assign);
 

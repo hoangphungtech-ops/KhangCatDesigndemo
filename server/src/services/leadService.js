@@ -30,6 +30,10 @@ async function listAdminLeads(filters) {
   return leadModel.list(filters);
 }
 
+async function listOutboxJobs(limit) {
+  return leadModel.listOutbox(limit);
+}
+
 async function updateStatus(code, status, actor) {
   return leadModel.updateStatus(code, status, actor);
 }
@@ -70,6 +74,7 @@ module.exports = {
   STATUS_PROGRESS,
   createLead,
   listAdminLeads,
+  listOutboxJobs,
   updateStatus,
   updateAssignment,
   findClientRequests,
