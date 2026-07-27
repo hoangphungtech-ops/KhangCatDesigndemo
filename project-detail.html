@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Detail — KHANGCAT Design & Build</title>
+    <meta name="description" content="Case study dự án kiến trúc cao cấp của KHANGCAT Design & Build.">
+    <link rel="canonical" href="https://khangcatdesigndemo.com/project-detail.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+  </head>
+  <body class="page-fade">
+    <header class="site-header">
+      <nav class="nav" aria-label="Điều hướng chính">
+        <a class="brand" href="index.html"><span class="logo-mark">KHANG<br>CAT</span><span class="brand-word">KHANGCAT <span>design</span></span></a>
+        <div class="nav-links"><a href="projects.html">Dự án</a><a href="index.html#services">Dịch vụ</a><a href="index.html#process">Quy trình</a><a href="index.html#about">Về KhangCat</a><a href="#contact">Liên hệ</a></div>
+        <a class="btn btn-primary" href="#contact">Bắt đầu dự án</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false">☰</button>
+      </nav>
+    </header>
+    <div class="mobile-menu" data-mobile-menu><button class="modal-close" type="button" data-menu-close>×</button><a href="projects.html"><small>01</small>Dự án</a><a href="index.html#services"><small>02</small>Dịch vụ</a><a href="index.html#process"><small>03</small>Quy trình</a><a href="index.html#about"><small>04</small>Về KhangCat</a><a href="#contact"><small>05</small>Liên hệ</a></div>
+    <main>
+      <section class="project-hero" data-project-hero>
+        <div class="container">
+          <span class="eyebrow">Case Study</span>
+          <h1 class="display" data-project-title></h1>
+          <p data-project-meta></p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container case-grid">
+          <div><span class="eyebrow">Project Information</span><p class="lead" data-project-summary></p></div>
+          <div class="project-facts" data-project-info></div>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="container case-grid">
+          <article><span class="eyebrow">Design Challenge</span><h2 class="case-title">Bài toán thiết kế</h2><p class="lead" data-project-challenge></p></article>
+          <article><span class="eyebrow">KhangCat Solution</span><h2 class="case-title">Giải pháp</h2><p class="lead" data-project-solution></p></article>
+        </div>
+      </section>
+      <section class="section" style="padding-top:0">
+        <div class="container">
+          <span class="eyebrow">Project Gallery</span>
+          <div class="detail-gallery" data-project-gallery></div>
+        </div>
+      </section>
+      <section class="section" id="contact">
+        <div class="container contact-grid">
+          <div><span class="eyebrow">Project Request</span><h2 class="section-title">Trao đổi về<br>dự án tương tự.</h2></div>
+          <form class="contact-form" data-lead-form>
+            <input type="hidden" name="project" data-project-input>
+            <input type="hidden" name="projectCode" data-project-code>
+            <div class="field"><label>Họ và tên</label><input name="name" required></div>
+            <div class="form-row"><div class="field"><label>Số điện thoại</label><input name="phone" required></div><div class="field"><label>Email</label><input name="email" type="email" required></div></div>
+            <div class="field"><label>Địa điểm dự án</label><input name="address"></div>
+            <div class="field"><label>Nội dung nhu cầu</label><textarea name="message" required></textarea></div>
+            <button class="btn btn-primary" type="submit">Gửi yêu cầu</button>
+            <p class="form-status" data-form-status></p>
+          </form>
+        </div>
+      </section>
+      <nav class="container project-nav" aria-label="Điều hướng dự án">
+        <a class="btn" data-prev-project href="#"></a>
+        <a class="btn" href="projects.html">Quay lại portfolio</a>
+        <a class="btn" data-next-project href="#"></a>
+      </nav>
+    </main>
+    <div class="modal" data-gallery-modal aria-modal="true" role="dialog"><button class="modal-close" data-gallery-close type="button">×</button><img class="gallery-img" data-gallery-image alt="Ảnh dự án"><div class="gallery-bar"><button data-gallery-prev type="button">←</button><span data-gallery-count>1 / 1</span><button data-gallery-next type="button">→</button></div></div>
+    <script type="module" src="js/project-detail.js"></script>
+  </body>
+</html>

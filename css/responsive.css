@@ -1,0 +1,51 @@
+@media (max-width: 1100px) {
+  .nav-links, .nav .btn { display: none; }
+  .menu-toggle {
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: rgba(250,249,246,.68);
+    align-items: center;
+    justify-content: center;
+  }
+  .portfolio-head,
+  .intro-grid,
+  .contact-grid,
+  .footer-grid { grid-template-columns: 1fr; }
+  .discipline-row { grid-template-columns: repeat(2, 1fr); }
+  .process { grid-template-columns: 1fr; border-top: 0; }
+  .process-step { min-height: auto; border-right: 0; border-top: 1px solid var(--line); }
+  .value-grid { grid-template-columns: 1fr; }
+  .case-grid { grid-template-columns: 1fr; }
+  .detail-gallery { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  :root { --container: min(100vw - 28px, 100%); }
+  .nav { min-height: 86px; }
+  .logo-mark { width: 70px; height: 50px; font-size: .76rem; }
+  .brand-word { font-size: 1.2rem; }
+  .hero-inner { padding: 140px 0 42px; }
+  .hero h1 { font-size: clamp(3.4rem, 18vw, 5.8rem); }
+  .hero-meta { grid-template-columns: 1fr; margin-top: 44px; }
+  .filters { overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; padding-bottom: 8px; }
+  .filter-chip { white-space: nowrap; }
+  .editorial-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .project-card,
+  .project-card.large,
+  .project-card.tall,
+  .project-card.medium,
+  .project-card.wide { grid-column: 1; min-height: 430px; }
+  .project-info h3 { font-size: 2.8rem; }
+  .service-item { grid-template-columns: 58px 1fr 28px; min-height: 108px; }
+  .service-item h3 { font-size: 2.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .quick-actions { right: 14px; bottom: 14px; }
+  .quick-actions a { width: 52px; height: 52px; }
+  .project-facts { grid-template-columns: 1fr; }
+  .detail-gallery { grid-template-columns: 1fr; }
+  .detail-image,
+  .detail-image:nth-child(4n + 1) { grid-column: 1; min-height: 390px; }
+  .project-nav { flex-direction: column; }
+}
