@@ -1,9 +1,10 @@
 FROM node:24-alpine
+WORKDIR /app
+COPY server/package*.json ./server/
 WORKDIR /app/server
-COPY server/package*.json ./
 RUN npm ci --omit=dev
-COPY server ./
-COPY index.html /app/index.html
-COPY images /app/images
+WORKDIR /app
+COPY . .
+WORKDIR /app/server
 EXPOSE 3000
 CMD ["node", "server.js"]
