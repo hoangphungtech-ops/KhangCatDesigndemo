@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="images/hero-construction.jpg">
+    <link rel="preload" as="image" href="images/biet-thu-bien/1.jpg">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
@@ -41,8 +41,8 @@
     <header class="site-header">
       <nav class="nav" aria-label="Điều hướng chính">
         <a class="brand" href="index.html" aria-label="KHANGCAT Design & Build">
-          <span class="logo-mark">KHANG<br>CAT</span>
-          <span class="brand-word">KHANGCAT <span>design</span></span>
+          <span class="logo-mark" aria-hidden="true">KHANG<br>CAT</span>
+          <span class="brand-word" aria-hidden="true">KHANGCAT <span>design</span></span>
         </a>
         <div class="nav-links">
           <a href="#projects">Dự án</a>
@@ -50,8 +50,6 @@
           <a href="#process">Quy trình</a>
           <a href="#about">Về KhangCat</a>
           <a href="#contact">Liên hệ</a>
-          <a href="#" data-open-client>Khách hàng</a>
-          <a href="#" data-open-admin>Admin</a>
         </div>
         <a class="btn btn-primary" href="#contact">Bắt đầu dự án</a>
         <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobileMenu">
@@ -72,7 +70,7 @@
     <main>
       <section class="hero" id="home">
         <div class="hero-media">
-          <img src="images/hero-construction.jpg" alt="Công trình xây dựng đang thi công">
+          <img src="images/biet-thu-bien/1.jpg" alt="Biệt thự biển cao cấp do KHANGCAT định hướng thiết kế">
         </div>
         <div class="hero-inner reveal">
           <span class="eyebrow">KHANGCAT — Architecture, Interior & BIM</span>
@@ -84,8 +82,8 @@
           </div>
           <div class="hero-meta">
             <span class="scroll-note">Scroll to explore</span>
-            <span>Featured / Trạm PCCC & Văn Phòng</span>
-            <span>Vietnam · 2026</span>
+            <span>Featured / Biệt Thự Biển</span>
+            <span>Coastal Residence · 2026</span>
           </div>
         </div>
       </section>
@@ -104,6 +102,11 @@
               <span>Kỹ thuật</span>
               <span>Thi công</span>
             </div>
+            <div class="proof-row reveal" aria-label="Bằng chứng năng lực">
+              <article><b>01</b><span>đầu mối phối hợp kiến trúc — BIM — MEP — PCCC</span></article>
+              <article><b>QC</b><span>hồ sơ được kiểm tra trước khi bàn giao</span></article>
+              <article><b>CRM</b><span>cập nhật yêu cầu và tiến độ theo từng giai đoạn</span></article>
+            </div>
           </div>
         </div>
       </section>
@@ -117,7 +120,20 @@
             </div>
             <div class="filters" data-project-filters aria-label="Lọc dự án"></div>
           </div>
-          <div class="editorial-grid" data-project-grid></div>
+          <div class="editorial-grid" data-project-grid>
+            <a class="project-card large reveal" href="project-detail.html?project=biet-thu-bien">
+              <img src="images/biet-thu-bien/1.jpg" alt="Biệt Thự Biển" loading="eager">
+              <div class="project-info"><div class="project-kicker"><span>Biệt thự / Coastal Residence</span><span>01</span></div><h3>Biệt Thự Biển</h3><p>Thiết kế biệt thự nghỉ dưỡng đón trọn ánh sáng tự nhiên, cân bằng giữa kiến trúc cao cấp và cảnh quan biển.</p></div>
+            </a>
+            <a class="project-card tall reveal" href="project-detail.html?project=tram-pccc">
+              <img src="images/tram-pccc/1.jpg" alt="Trạm PCCC & Văn Phòng" loading="eager">
+              <div class="project-info"><div class="project-kicker"><span>PCCC / BIM / Technical Design</span><span>02</span></div><h3>Trạm PCCC & Văn Phòng</h3><p>Thiết kế không gian làm việc tích hợp, đạt chuẩn nghiệm thu PCCC và đồng bộ hệ thống kỹ thuật.</p></div>
+            </a>
+            <a class="project-card medium reveal" href="project-detail.html?project=noi-that-nha-pho">
+              <img src="images/noi-that-nha-pho/1.jpg" alt="Nội Thất Nhà Phố" loading="lazy">
+              <div class="project-info"><div class="project-kicker"><span>Nội thất / Private Residence</span><span>03</span></div><h3>Nội Thất Nhà Phố</h3><p>Thiết kế nội thất tinh gọn, tối ưu công năng sử dụng và ánh sáng trong không gian nhà ở.</p></div>
+            </a>
+          </div>
           <div style="margin-top: 34px">
             <a class="btn" href="projects.html">Xem toàn bộ portfolio →</a>
           </div>
@@ -129,11 +145,11 @@
           <span class="eyebrow">03 / Services</span>
           <h2 class="section-title">Năng lực<br>tích hợp.</h2>
           <div class="service-list reveal">
-            <a class="service-item" href="#contact"><span>01</span><h3>Thiết kế kiến trúc</h3><b>→</b></a>
-            <a class="service-item" href="#contact"><span>02</span><h3>Thiết kế nội thất</h3><b>→</b></a>
-            <a class="service-item" href="#contact"><span>03</span><h3>BIM và phối hợp kỹ thuật</h3><b>→</b></a>
-            <a class="service-item" href="#contact"><span>04</span><h3>Hồ sơ PCCC và MEP</h3><b>→</b></a>
-            <a class="service-item" href="#contact"><span>05</span><h3>Thi công và giám sát</h3><b>→</b></a>
+            <a class="service-item" href="services.html#architecture"><span>01</span><h3>Thiết kế kiến trúc</h3><b>→</b></a>
+            <a class="service-item" href="services.html#interior"><span>02</span><h3>Thiết kế nội thất</h3><b>→</b></a>
+            <a class="service-item" href="services.html#bim"><span>03</span><h3>BIM và phối hợp kỹ thuật</h3><b>→</b></a>
+            <a class="service-item" href="services.html#pccc-mep"><span>04</span><h3>Hồ sơ PCCC và MEP</h3><b>→</b></a>
+            <a class="service-item" href="services.html#build"><span>05</span><h3>Thi công và giám sát</h3><b>→</b></a>
           </div>
         </div>
       </section>
@@ -174,6 +190,7 @@
             <p class="lead intro-copy">Hãy chia sẻ loại công trình, vị trí và nhu cầu sơ bộ. KhangCat sẽ liên hệ để cùng bạn phát triển phương án phù hợp.</p>
           </div>
           <form class="contact-form reveal" data-lead-form>
+            <input class="hp-field" name="companyWebsite" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field"><label for="name">Họ và tên</label><input id="name" name="name" autocomplete="name" required></div>
             <div class="form-row">
               <div class="field"><label for="phone">Số điện thoại</label><input id="phone" name="phone" inputmode="tel" autocomplete="tel" required></div>
@@ -182,6 +199,8 @@
             <div class="field"><label for="projectType">Loại công trình</label><select id="projectType" name="projectType"><option>Nhà phố</option><option>Biệt thự</option><option>Nội thất</option><option>Văn phòng</option><option>Nhà xưởng</option><option>PCCC / MEP / BIM</option></select></div>
             <div class="field"><label for="address">Địa điểm dự án</label><input id="address" name="address" autocomplete="street-address"></div>
             <div class="field"><label for="message">Nội dung nhu cầu</label><textarea id="message" name="message" required placeholder="Mô tả sơ bộ nhu cầu thiết kế, diện tích, ngân sách hoặc phong cách mong muốn..."></textarea></div>
+            <label class="consent"><input name="consent" type="checkbox" required> Tôi đồng ý để KHANGCAT liên hệ tư vấn theo thông tin đã cung cấp.</label>
+            <p class="privacy-note">Thông tin của bạn chỉ dùng để tư vấn dự án, không chia sẻ cho bên thứ ba nếu chưa có sự đồng ý.</p>
             <button class="btn btn-primary" type="submit">Gửi yêu cầu</button>
             <p class="form-status" data-form-status role="status"></p>
           </form>
@@ -193,12 +212,12 @@
       <div class="container">
         <div class="footer-grid">
           <div>
-            <a class="brand" href="index.html"><span class="logo-mark">KHANG<br>CAT</span><span class="brand-word">KHANGCAT <span>design</span></span></a>
+            <a class="brand" href="index.html" aria-label="KHANGCAT Design & Build"><span class="logo-mark" aria-hidden="true">KHANG<br>CAT</span><span class="brand-word" aria-hidden="true">KHANGCAT <span>design</span></span></a>
             <p style="margin-top: 24px">Designed with precision. Built with purpose.</p>
           </div>
           <div><h3>Liên hệ</h3><p>Hotline/Zalo: <a href="tel:+84938283213">0938 283 213</a><br>Email: <a href="mailto:huukha.k.arc@gmail.com">huukha.k.arc@gmail.com</a></p></div>
-          <div><h3>Điều hướng</h3><p><a href="#projects">Dự án</a><br><a href="#services">Dịch vụ</a><br><a href="#process">Quy trình</a><br><a href="#contact">Liên hệ</a></p></div>
-          <div><h3>Social</h3><p><a href="#">Facebook</a><br><a href="#">Instagram</a><br><a href="#">LinkedIn</a></p></div>
+          <div><h3>Điều hướng</h3><p><a href="projects.html">Dự án</a><br><a href="services.html">Dịch vụ</a><br><a href="#process">Quy trình</a><br><a href="#contact">Liên hệ</a></p></div>
+          <div><h3>Khách hàng</h3><p><a href="/client">Tra cứu tiến độ hồ sơ</a><br>Thông tin dự án được cập nhật theo từng giai đoạn.<br>Demo domain: khangcatdesigndemo.com</p></div>
         </div>
         <div class="footer-big">KHANGCAT</div>
         <p>© 2026 KHANGCAT Design & Build. All rights reserved.</p>
@@ -209,19 +228,6 @@
       <a class="quick-phone" href="tel:+84938283213" aria-label="Gọi nhanh">☎</a>
       <a class="quick-zalo" href="https://zalo.me/0938283213" aria-label="Zalo"><img src="images/zalo-logo.png" alt=""></a>
     </div>
-
-    <dialog class="contact-form" data-admin-panel>
-      <button class="modal-close" data-admin-close type="button" aria-label="Đóng">×</button>
-      <h2>KHANGCAT Admin Dashboard</h2>
-      <div data-admin-body></div>
-    </dialog>
-    <dialog class="contact-form" data-client-panel>
-      <button class="modal-close" data-client-close type="button" aria-label="Đóng">×</button>
-      <h2>Client Dashboard</h2>
-      <p class="lead">Nhập số điện thoại để xem tiến độ dự án.</p>
-      <form data-client-form class="field"><label>Số điện thoại</label><input name="phone" inputmode="tel"><button class="btn btn-primary" type="submit">Xem tiến độ</button></form>
-      <div data-client-result></div>
-    </dialog>
 
     <div class="modal" data-gallery-modal aria-modal="true" role="dialog">
       <button class="modal-close" data-gallery-close type="button" aria-label="Đóng">×</button>

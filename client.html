@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Client Dashboard — KHANGCAT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+  </head>
+  <body>
+    <main class="client-page">
+      <section class="client-shell">
+        <a class="brand" href="index.html" aria-label="KHANGCAT Design & Build"><span class="logo-mark" aria-hidden="true">KHANG<br>CAT</span><span class="brand-word" aria-hidden="true">KHANGCAT <span>design</span></span></a>
+        <span class="eyebrow">Client Dashboard</span>
+        <h1>Tra cứu tiến độ dự án</h1>
+        <p class="lead">Nhập số điện thoại đã gửi yêu cầu để xem mã hồ sơ, trạng thái và tiến độ xử lý.</p>
+        <form class="contact-form" data-client-form>
+          <div class="field"><label>Số điện thoại</label><input name="phone" inputmode="tel" autocomplete="tel" required></div>
+          <button class="btn btn-primary" type="submit">Xem tiến độ</button>
+        </form>
+        <div class="client-result" data-client-result></div>
+      </section>
+    </main>
+    <script type="module" src="js/client-page.js"></script>
+  </body>
+</html>

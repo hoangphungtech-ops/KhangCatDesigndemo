@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portfolio — KHANGCAT Design & Build</title>
-    <meta name="description" content="Danh sách dự án kiến trúc, nội thất, BIM, PCCC và cảnh quan của KHANGCAT Design & Build.">
+    <title>Portfolio dự án — KHANGCAT Design & Build</title>
+    <meta name="description" content="Portfolio dự án thật của KHANGCAT: biệt thự, nhà phố, nội thất, văn phòng, nhà xưởng, BIM, PCCC và cảnh quan.">
     <link rel="canonical" href="https://khangcatdesigndemo.com/projects.html">
+    <meta property="og:title" content="Portfolio dự án — KHANGCAT Design & Build">
+    <meta property="og:description" content="Các case study kiến trúc, nội thất, BIM, PCCC và cảnh quan do KHANGCAT triển khai.">
+    <meta property="og:image" content="https://khangcatdesigndemo.com/images/biet-thu-bien/1.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,24 +19,57 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "KHANGCAT Portfolio",
+        "hasPart": [
+          {"@type":"CreativeWork","name":"Biệt Thự Biển","genre":"Architecture / Villa / Landscape"},
+          {"@type":"CreativeWork","name":"Trạm PCCC & Văn Phòng","genre":"Architecture / BIM / PCCC / MEP"},
+          {"@type":"CreativeWork","name":"Nội Thất Nhà Phố","genre":"Interior Design / Residence"}
+        ]
+      }
+    </script>
   </head>
   <body class="page-fade">
     <header class="site-header is-scrolled">
       <nav class="nav" aria-label="Điều hướng chính">
-        <a class="brand" href="index.html"><span class="logo-mark">KHANG<br>CAT</span><span class="brand-word">KHANGCAT <span>design</span></span></a>
-        <div class="nav-links"><a href="index.html#projects">Dự án</a><a href="index.html#services">Dịch vụ</a><a href="index.html#process">Quy trình</a><a href="index.html#about">Về KhangCat</a><a href="index.html#contact">Liên hệ</a></div>
+        <a class="brand" href="index.html" aria-label="KHANGCAT Design & Build"><span class="logo-mark" aria-hidden="true">KHANG<br>CAT</span><span class="brand-word" aria-hidden="true">KHANGCAT <span>design</span></span></a>
+        <div class="nav-links"><a href="projects.html">Dự án</a><a href="services.html">Dịch vụ</a><a href="index.html#process">Quy trình</a><a href="index.html#about">Về KhangCat</a><a href="index.html#contact">Liên hệ</a></div>
         <a class="btn btn-primary" href="index.html#contact">Bắt đầu dự án</a>
-        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false">☰</button>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false"><span class="visually-hidden">Mở menu</span>☰</button>
       </nav>
     </header>
-    <div class="mobile-menu" data-mobile-menu><button class="modal-close" type="button" data-menu-close>×</button><a href="index.html#projects"><small>01</small>Dự án</a><a href="index.html#services"><small>02</small>Dịch vụ</a><a href="index.html#process"><small>03</small>Quy trình</a><a href="index.html#about"><small>04</small>Về KhangCat</a><a href="index.html#contact"><small>05</small>Liên hệ</a></div>
+    <div class="mobile-menu" data-mobile-menu><button class="modal-close" type="button" data-menu-close>×</button><a href="projects.html"><small>01</small>Dự án</a><a href="services.html"><small>02</small>Dịch vụ</a><a href="index.html#process"><small>03</small>Quy trình</a><a href="index.html#about"><small>04</small>Về KhangCat</a><a href="index.html#contact"><small>05</small>Liên hệ</a></div>
     <main class="section" style="padding-top: 170px">
       <div class="container">
         <div class="portfolio-head">
-          <div><span class="eyebrow">Portfolio Index</span><h1 class="section-title">Selected<br>Works.</h1></div>
+          <div><span class="eyebrow">Portfolio Index</span><h1 class="section-title">Selected<br>Works.</h1><p class="lead intro-copy">Mỗi dự án là một hồ sơ thiết kế có bối cảnh, phạm vi, bài toán và giải pháp riêng — không chỉ là một bộ ảnh minh họa.</p></div>
           <div class="filters" data-project-filters></div>
         </div>
-        <div class="editorial-grid" data-project-grid></div>
+        <div class="editorial-grid" data-project-grid>
+          <a class="project-card large reveal" href="project-detail.html?project=biet-thu-bien">
+            <img src="images/biet-thu-bien/1.jpg" alt="Biệt Thự Biển" loading="eager">
+            <div class="project-info"><div class="project-kicker"><span>Biệt thự / Coastal Residence / 2026</span><span>01</span></div><h3>Biệt Thự Biển</h3><p>Thiết kế biệt thự nghỉ dưỡng đón trọn ánh sáng tự nhiên, cân bằng giữa kiến trúc cao cấp và cảnh quan biển. Phạm vi: Architecture / Exterior / Landscape.</p></div>
+          </a>
+          <a class="project-card tall reveal" href="project-detail.html?project=tram-pccc">
+            <img src="images/tram-pccc/1.jpg" alt="Trạm PCCC & Văn Phòng" loading="eager">
+            <div class="project-info"><div class="project-kicker"><span>PCCC / BIM / MEP / 2026</span><span>02</span></div><h3>Trạm PCCC & Văn Phòng</h3><p>Đồng bộ kiến trúc, MEP, PCCC và shopdrawing để công trình đáp ứng vận hành, nghiệm thu và triển khai kỹ thuật.</p></div>
+          </a>
+          <a class="project-card medium reveal" href="project-detail.html?project=noi-that-nha-pho">
+            <img src="images/noi-that-nha-pho/1.jpg" alt="Nội Thất Nhà Phố" loading="lazy">
+            <div class="project-info"><div class="project-kicker"><span>Nội thất / Private Residence / 2026</span><span>03</span></div><h3>Nội Thất Nhà Phố</h3><p>Không gian nội thất tinh gọn, tối ưu công năng, ánh sáng và hệ vật liệu theo một ngôn ngữ nhất quán.</p></div>
+          </a>
+          <a class="project-card medium reveal" href="project-detail.html?project=office">
+            <img src="images/office/1.jpg" alt="Office" loading="lazy">
+            <div class="project-info"><div class="project-kicker"><span>Văn phòng / Workplace / 2026</span><span>04</span></div><h3>Office</h3><p>Bố trí không gian làm việc mở linh hoạt, tích hợp hệ thống kỹ thuật thông minh và nhận diện chuyên nghiệp.</p></div>
+          </a>
+          <a class="project-card wide reveal" href="project-detail.html?project=nha-xuong">
+            <img src="images/nha-xuong/1.jpg" alt="Nhà Xưởng" loading="lazy">
+            <div class="project-info"><div class="project-kicker"><span>Nhà xưởng / BIM / Technical Coordination / 2026</span><span>05</span></div><h3>Nhà Xưởng</h3><p>Triển khai hồ sơ kỹ thuật, kiểm soát va chạm và phục vụ thi công tốc độ cao trong môi trường công nghiệp.</p></div>
+          </a>
+        </div>
       </div>
     </main>
     <script type="module" src="js/page-projects.js"></script>

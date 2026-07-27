@@ -20,7 +20,7 @@
   <body class="page-fade">
     <header class="site-header">
       <nav class="nav" aria-label="Điều hướng chính">
-        <a class="brand" href="index.html"><span class="logo-mark">KHANG<br>CAT</span><span class="brand-word">KHANGCAT <span>design</span></span></a>
+        <a class="brand" href="index.html" aria-label="KHANGCAT Design & Build"><span class="logo-mark" aria-hidden="true">KHANG<br>CAT</span><span class="brand-word" aria-hidden="true">KHANGCAT <span>design</span></span></a>
         <div class="nav-links"><a href="projects.html">Dự án</a><a href="index.html#services">Dịch vụ</a><a href="index.html#process">Quy trình</a><a href="index.html#about">Về KhangCat</a><a href="#contact">Liên hệ</a></div>
         <a class="btn btn-primary" href="#contact">Bắt đầu dự án</a>
         <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false">☰</button>
@@ -28,41 +28,54 @@
     </header>
     <div class="mobile-menu" data-mobile-menu><button class="modal-close" type="button" data-menu-close>×</button><a href="projects.html"><small>01</small>Dự án</a><a href="index.html#services"><small>02</small>Dịch vụ</a><a href="index.html#process"><small>03</small>Quy trình</a><a href="index.html#about"><small>04</small>Về KhangCat</a><a href="#contact"><small>05</small>Liên hệ</a></div>
     <main>
-      <section class="project-hero" data-project-hero>
+      <section class="project-hero" data-project-hero style="background-image:linear-gradient(0deg, rgba(17,21,20,.74), rgba(17,21,20,.22)), url('images/tram-pccc/1.jpg')">
         <div class="container">
           <span class="eyebrow">Case Study</span>
-          <h1 class="display" data-project-title></h1>
-          <p data-project-meta></p>
+          <h1 class="display" data-project-title>Trạm PCCC & Văn Phòng</h1>
+          <p data-project-meta>Fire Station & Office · 2026 · PCCC / BIM / MEP</p>
         </div>
       </section>
       <section class="section">
         <div class="container case-grid">
-          <div><span class="eyebrow">Project Information</span><p class="lead" data-project-summary></p></div>
-          <div class="project-facts" data-project-info></div>
+          <div><span class="eyebrow">Project Information</span><p class="lead" data-project-summary>Thiết kế không gian làm việc tích hợp, đạt chuẩn nghiệm thu PCCC và đồng bộ hệ thống kỹ thuật.</p></div>
+          <div class="project-facts" data-project-info>
+            <div><span>Mã dự án</span><b>KC-FP01</b></div>
+            <div><span>Địa điểm</span><b>Fire Station & Office</b></div>
+            <div><span>Phạm vi</span><b>Architecture / MEP / PCCC / Shopdrawing</b></div>
+            <div><span>Tình trạng</span><b>Technical Design</b></div>
+            <div><span>Năm</span><b>2026</b></div>
+          </div>
         </div>
       </section>
       <section class="section" style="padding-top:0">
         <div class="container case-grid">
-          <article><span class="eyebrow">Design Challenge</span><h2 class="case-title">Bài toán thiết kế</h2><p class="lead" data-project-challenge></p></article>
-          <article><span class="eyebrow">KhangCat Solution</span><h2 class="case-title">Giải pháp</h2><p class="lead" data-project-solution></p></article>
+          <article><span class="eyebrow">Design Challenge</span><h2 class="case-title">Bài toán thiết kế</h2><p class="lead" data-project-challenge>Đồng bộ yêu cầu vận hành khẩn cấp, hồ sơ PCCC, MEP và không gian văn phòng trong cùng một công trình.</p></article>
+          <article><span class="eyebrow">KhangCat Solution</span><h2 class="case-title">Giải pháp</h2><p class="lead" data-project-solution>KhangCat phối hợp đa bộ môn từ sớm, kiểm soát luồng xe, tuyến kỹ thuật và hồ sơ nghiệm thu để giảm rủi ro thi công.</p></article>
         </div>
       </section>
       <section class="section" style="padding-top:0">
         <div class="container">
           <span class="eyebrow">Project Gallery</span>
-          <div class="detail-gallery" data-project-gallery></div>
+          <div class="detail-gallery" data-project-gallery>
+            <button class="detail-image reveal" type="button"><img src="images/tram-pccc/1.jpg" alt="Trạm PCCC & Văn Phòng 1" loading="eager"></button>
+            <button class="detail-image reveal" type="button"><img src="images/tram-pccc/2.jpg" alt="Trạm PCCC & Văn Phòng 2" loading="lazy"></button>
+            <button class="detail-image reveal" type="button"><img src="images/tram-pccc/3.jpg" alt="Trạm PCCC & Văn Phòng 3" loading="lazy"></button>
+          </div>
         </div>
       </section>
       <section class="section" id="contact">
         <div class="container contact-grid">
           <div><span class="eyebrow">Project Request</span><h2 class="section-title">Trao đổi về<br>dự án tương tự.</h2></div>
           <form class="contact-form" data-lead-form>
+            <input class="hp-field" name="companyWebsite" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="project" data-project-input>
             <input type="hidden" name="projectCode" data-project-code>
             <div class="field"><label>Họ và tên</label><input name="name" required></div>
             <div class="form-row"><div class="field"><label>Số điện thoại</label><input name="phone" required></div><div class="field"><label>Email</label><input name="email" type="email" required></div></div>
             <div class="field"><label>Địa điểm dự án</label><input name="address"></div>
             <div class="field"><label>Nội dung nhu cầu</label><textarea name="message" required></textarea></div>
+            <label class="consent"><input name="consent" type="checkbox" required> Tôi đồng ý để KHANGCAT liên hệ tư vấn theo thông tin đã cung cấp.</label>
+            <p class="privacy-note">Thông tin của bạn chỉ dùng để tư vấn dự án, không chia sẻ cho bên thứ ba nếu chưa có sự đồng ý.</p>
             <button class="btn btn-primary" type="submit">Gửi yêu cầu</button>
             <p class="form-status" data-form-status></p>
           </form>

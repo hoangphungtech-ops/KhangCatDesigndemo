@@ -35,12 +35,22 @@ export function initContactForms() {
         style: String(data.style || "").trim(),
         message: String(data.message || "").trim(),
         file: "",
+        consent: data.consent === "on",
+        companyWebsite: String(data.companyWebsite || "").trim(),
         date: new Date().toISOString(),
         source: "website",
       };
 
       if (payload.name.length < 2 || payload.phone.length < 8 || !payload.email.includes("@") || payload.message.length < 5) {
         status.textContent = "Vui lòng nhập đủ họ tên, số điện thoại, email và nội dung nhu cầu.";
+        return;
+      }
+      if (!payload.consent) {
+        status.textContent = "Vui lòng xác nhận đồng ý để KHANGCAT liên hệ tư vấn.";
+        return;
+      }
+      if (payload.companyWebsite) {
+        status.textContent = "Yêu cầu chưa được ghi nhận.";
         return;
       }
 

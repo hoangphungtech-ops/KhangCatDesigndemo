@@ -2,7 +2,6 @@ import { initNavigation } from "./navigation.js";
 import { initReveal } from "./animations.js";
 import { initContactForms } from "./contact.js";
 import { initGallery } from "./gallery.js";
-import { initAdminClient } from "./admin-client.js";
 import { loadProjects, renderEditorialGrid, renderFilters } from "./projects.js";
 
 async function initHome() {
@@ -23,5 +22,4 @@ initNavigation();
 initReveal();
 initGallery();
 initContactForms();
-initAdminClient();
 initHome().catch((error) => console.error(error));

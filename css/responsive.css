@@ -15,9 +15,12 @@
   .contact-grid,
   .footer-grid { grid-template-columns: 1fr; }
   .discipline-row { grid-template-columns: repeat(2, 1fr); }
+  .proof-row { grid-template-columns: 1fr; }
   .process { grid-template-columns: 1fr; border-top: 0; }
   .process-step { min-height: auto; border-right: 0; border-top: 1px solid var(--line); }
   .value-grid { grid-template-columns: 1fr; }
+  .service-detail-grid,
+  .service-detail-grid article:first-child { grid-template-columns: 1fr; grid-column: auto; }
   .case-grid { grid-template-columns: 1fr; }
   .detail-gallery { grid-template-columns: 1fr 1fr; }
 }
@@ -48,4 +51,5 @@
   .detail-image,
   .detail-image:nth-child(4n + 1) { grid-column: 1; min-height: 390px; }
   .project-nav { flex-direction: column; }
+  .admin-page-head { align-items: flex-start; flex-direction: column; }
 }
