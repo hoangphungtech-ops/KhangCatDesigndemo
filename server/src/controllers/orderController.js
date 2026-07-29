@@ -35,8 +35,6 @@ const leadSchema = z.object({
   area: optionalTextField(80),
   budget: optionalTextField(120),
   style: optionalTextField(120),
-  consent: z.boolean().optional().default(false),
-  companyWebsite: optionalTextField(160),
 });
 
 async function create(req, res, next) {
@@ -49,26 +47,9 @@ async function create(req, res, next) {
         fields: parsed.error.flatten().fieldErrors,
       });
     }
-    if (parsed.data.companyWebsite) {
-      return res.status(202).json({
-        success: true,
-        queued: true,
-        code: "KC-RECEIVED",
-        status: "new",
-        message: "Yêu cầu đã được ghi nhận.",
-      });
-    }
-    if (!parsed.data.consent) {
-      return res.status(400).json({
-        success: false,
-        message: "Vui lòng xác nhận đồng ý để KHANGCAT liên hệ tư vấn.",
-      });
-    }
 
     const result = await leadService.createLead({
       ...parsed.data,
-      companyWebsite: undefined,
-      consent: undefined,
       source: parsed.data.source || "website",
     });
 

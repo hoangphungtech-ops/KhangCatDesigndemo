@@ -92,23 +92,10 @@ async function createApp() {
   app.use("/api/client", clientRoutes);
 
   app.use("/server", (req, res) => res.sendStatus(404));
-  app.get(["/projects", "/projects/"], (req, res) =>
-    res.sendFile(path.join(__dirname, "..", "..", "projects.html")),
-  );
-  app.get(["/services", "/services/"], (req, res) =>
-    res.sendFile(path.join(__dirname, "..", "..", "services.html")),
-  );
-  app.get(["/client", "/client/"], (req, res) =>
-    res.sendFile(path.join(__dirname, "..", "..", "client.html")),
-  );
-  app.get(["/admin", "/admin/"], (req, res) =>
-    res.sendFile(path.join(__dirname, "..", "..", "admin.html")),
+  app.get(["/client", "/admin"], (req, res) =>
+    res.sendFile(path.join(__dirname, "..", "..", "index.html")),
   );
   app.use(express.static(path.join(__dirname, "..", ".."), { dotfiles: "deny" }));
-  app.use((req, res, next) => {
-    if (req.path.startsWith("/api/")) return next();
-    return res.status(404).sendFile(path.join(__dirname, "..", "..", "404.html"));
-  });
 
   app.use((error, req, res, next) => {
     console.error(`[${req.method} ${req.path}]`, error.message);
